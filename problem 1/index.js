@@ -5,7 +5,7 @@
 - A Commercial Park takes 10 units of time to build and covers 3x1 parcel of land.
 
 */
-// manually written
+
 function maxProfitWrapper() {
   const profitMap = new Map();
 
