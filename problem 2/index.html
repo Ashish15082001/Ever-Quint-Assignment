@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Water Tank — Trapping Rain Water</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header>
+        <h1>Water Tank</h1>
+        <p>
+          Enter block heights to compute the units of water trapped between
+          them.
+        </p>
+      </header>
+
+      <section>
+        <label>Block heights (comma separated)</label>
+        <div>
+          <input
+            id="heights"
+            type="text"
+            placeholder="e.g. 0, 4, 0, 0, 0, 6, 0, 6, 4, 0"
+          />
+          <button id="compute" type="button">Compute</button>
+        </div>
+        <p id="error" class="error" hidden></p>
+      </section>
+
+      <section class="result">
+        <strong id="total-water">0 Units</strong>
+        <div id="table"></div>
+      </section>
+    </main>
+
+    <script src="index.js" defer></script>
+  </body>
+</html>
