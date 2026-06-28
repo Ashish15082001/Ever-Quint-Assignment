@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Max Profit — Mars Land</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header>
+        <h1>Max Profit</h1>
+        <p>
+          Enter the number of time units. We compute the most profitable mix of
+          Theatres, Pubs and Commercial Parks Mr. X can develop.
+        </p>
+      </header>
+
+      <section>
+        <label for="time">Time units (n)</label>
+        <div>
+          <input id="time" type="number" min="0" step="1" placeholder="e.g. 13" />
+          <button id="compute" type="button">Compute</button>
+        </div>
+        <p id="error" class="error" hidden></p>
+      </section>
+
+      <section class="result">
+        <span class="result-label">Max earnings</span>
+        <strong id="earnings">$0</strong>
+      </section>
+    </main>
+
+    <script src="index.js" defer></script>
+  </body>
+</html>
