@@ -13,20 +13,22 @@ function maxProfitWrapper() {
   const getMax = (time, profit1, profit2, profit3) => {
     const maxProfitValue = Math.max(profit1, profit2, profit3);
 
-    switch (maxProfitValue) {
-      case profit1: {
-        firstBestBuildingTimeWise.set(time, "Theatre");
-        break;
-      }
+    if (maxProfitValue > 0) {
+      switch (maxProfitValue) {
+        case profit1: {
+          firstBestBuildingTimeWise.set(time, "T");
+          break;
+        }
 
-      case profit2: {
-        firstBestBuildingTimeWise.set(time, "Pub");
-        break;
-      }
+        case profit2: {
+          firstBestBuildingTimeWise.set(time, "P");
+          break;
+        }
 
-      case profit3: {
-        firstBestBuildingTimeWise.set(time, "Commercialub");
-        break;
+        case profit3: {
+          firstBestBuildingTimeWise.set(time, "C");
+          break;
+        }
       }
     }
 
@@ -70,23 +72,25 @@ function maxProfitWrapper() {
   };
 
   const getBestPath = (time) => {
-    const bestPathMap = new Map();
+    const bestPathMap = new Map([
+      ["T", 0],
+      ["P", 0],
+      ["C", 0],
+    ]);
 
-    for (let i = time; i > 3; ) {
+    for (let i = time; i > 4; ) {
       const currentFirstBuilding = firstBestBuildingTimeWise.get(i);
 
-      if (bestPathMap.has(currentFirstBuilding)) {
-        bestPathMap.set(
-          currentFirstBuilding,
-          bestPathMap.get(currentFirstBuilding) + 1,
-        );
-      } else bestPathMap.set(currentFirstBuilding, 1);
+      bestPathMap.set(
+        currentFirstBuilding,
+        bestPathMap.get(currentFirstBuilding) + 1,
+      );
 
-      if (currentFirstBuilding === "Theatre") i -= 5;
-      else if (currentFirstBuilding === "Pub") i -= 4;
+      if (currentFirstBuilding === "T") i -= 5;
+      else if (currentFirstBuilding === "P") i -= 4;
       else i -= 10;
     }
-    console.log(bestPathMap);
+
     return bestPathMap;
   };
 
@@ -95,8 +99,6 @@ function maxProfitWrapper() {
     getBestPath,
   };
 }
-
-const { getMaxProfit, getBestPath } = maxProfitWrapper();
 
 const timeInputElement = document.querySelector("#time");
 const computeButtonElement = document.querySelector("#compute");
@@ -123,10 +125,13 @@ const handleCompute = () => {
   }
 
   hideError();
-  earningsElement.textContent =
-    `$${getMaxProfit(parseInt(raw, 10))} ` +
-    JSON.stringify(Object.fromEntries(getBestPath(parseInt(raw, 10))));
-  // `$${getMaxProfit(parseInt(raw, 10)).maxProfitValue}`;
+
+  const { getMaxProfit, getBestPath } = maxProfitWrapper();
+
+  const maxProfit = getMaxProfit(parseInt(raw, 10));
+  const path = Object.fromEntries(getBestPath(parseInt(raw, 10)));
+
+  earningsElement.textContent = `Earnings: $${maxProfit} -  Solution = T : ${path["T"]} P : ${path["P"]} C : ${path["C"]}`;
 };
 
 computeButtonElement.addEventListener("click", handleCompute);
